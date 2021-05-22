@@ -23,9 +23,6 @@
         "publicIpAddressSku": {
             "value": "Standard"
         },
-        "virtualMachineName": {
-            "value": "serverDC1"
-        },
         "virtualMachineComputerName": {
             "value": "serverDC1"
         },
