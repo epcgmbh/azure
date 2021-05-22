@@ -43,6 +43,7 @@
         },
         "adminPassword": {
             "type": "string"
+            "defaultvalue": "Wassertomate09"
         },
         "patchMode": {
             "type": "string"
