@@ -42,7 +42,7 @@
             "value": "epc"
         },
         "adminPassword": {
-            "value": $secure
+            "value": Wassertomate09
         },
         "patchMode": {
             "value": "AutomaticByOS"
