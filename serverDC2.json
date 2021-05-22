@@ -41,9 +41,6 @@
         "adminUsername": {
             "type": "string"
         },
-        "adminPassword": {
-            "type": "secureString"
-        },
         "patchMode": {
             "type": "string"
         },
