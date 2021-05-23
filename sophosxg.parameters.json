@@ -1,0 +1,72 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmName": {
+            "value": "SophosXG"
+        },
+        "adminPassword": {
+            "value": null
+        },
+        "vmSize": {
+            "value": "Standard_F2s_v2"
+        },
+        "netNewOrExisting": {
+            "value": "existing"
+        },
+        "netRG": {
+            "value": "RG-FFM-VNET"
+        },
+        "netName": {
+            "value": "RG-FFM-VMET"
+        },
+        "netPrefix": {
+            "value": "10.20.0.0/16"
+        },
+        "wanName": {
+            "value": "Sophos_WAN_PortB"
+        },
+        "wanPrefix": {
+            "value": "10.20.254.0/24"
+        },
+        "lanName": {
+            "value": "Sophos_LAN_PortA"
+        },
+        "lanPrefix": {
+            "value": "10.20.1.0/24"
+        },
+        "storageNewOrExisting": {
+            "value": "new"
+        },
+        "storageRG": {
+            "value": "RG-FFM-SophosXG"
+        },
+        "storageName": {
+            "value": "epctest123"
+        },
+        "storageType": {
+            "value": "Standard_LRS"
+        },
+        "imageSku": {
+            "value": "byol"
+        },
+        "publicIpDNS": {
+            "value": "epc123"
+        },
+        "publicIpName": {
+            "value": "PublicIP"
+        },
+        "publicIpNewOrExisting": {
+            "value": "new"
+        },
+        "publicIpRG": {
+            "value": "RG-FFM-SophosXG"
+        },
+        "publicIpType": {
+            "value": "Dynamic"
+        },
+        "location": {
+            "value": "germanywestcentral"
+        }
+    }
+}
