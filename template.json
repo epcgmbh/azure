@@ -4,7 +4,7 @@
     "parameters": {
         "location": {
             "type": "string",
-            "defaultvalue": "westgermanycentral"
+            "defaultvalue": "germanywestcentral"
         },
         "networkInterfaceName": {
             "type": "string",
