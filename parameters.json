@@ -41,6 +41,9 @@
         "adminUsername": {
             "value": "epc"
         },
+           "adminPassword": {
+            "value": "password"
+        },
         "patchMode": {
             "value": "AutomaticByOS"
         },
