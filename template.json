@@ -42,7 +42,8 @@
             "type": "string"
         },
         "adminPassword": {
-            "type": "secureString"
+            "type": "secureString",
+            "minLength" : 8           
         },
         "patchMode": {
             "type": "string"
