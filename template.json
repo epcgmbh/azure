@@ -1,0 +1,181 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "defaultvalue": "westgermanycentral"
+        },
+        "networkInterfaceName": {
+            "type": "string",
+  	    "defaultvalue": "serverdc1909"
+ 	},
+        "subnetName": {
+            "type": "string",
+            "defaultvalue": "Sophos_LAN_PortA"
+        },
+        "virtualNetworkId": {
+            "type": "string",
+            "defaultvalue": "/subscriptions/6a2ec0d8-e9ac-4a79-84aa-7f3541c8d6cd/resourceGroups/RG-FFM-VNET/providers/Microsoft.Network/virtualNetworks/RG-FFM-VMET"
+        },
+        "publicIpAddressName": {
+            "type": "string",
+	    "defaultvalue": "serverDC1-ip"
+        },
+        "publicIpAddressType": {
+            "type": "string",
+            "defaultvalue": "Static"
+        },
+        "publicIpAddressSku": {
+            "type": "string",
+            "defaultvalue": "Standard"
+        },
+        "virtualMachineName": {
+            "type": "string",
+            "defaultvalue": "serverDC1"
+        },
+        "virtualMachineComputerName": {
+            "type": "string",
+            "defaultvalue": "serverDC1"
+        },
+        "virtualMachineRG": {
+            "type": "string",
+            "defaultvalue": "RG-FFM-serverDC1"
+        },
+        "osDiskType": {
+            "type": "string",
+            "defaultvalue": "Premium_LRS"
+        },
+        "virtualMachineSize": {
+            "type": "string",
+            "defaultvalue": "Standard_D4s_v3"
+        },
+        "adminUsername": {
+            "type": "string",
+            "defaultvalue": "epc"
+        },
+        "adminPassword": {
+            "type": "secureString"
+        },
+        "patchMode": {
+            "type": "string",
+            "defaultvalue": "AutomaticByOS"
+        },
+        "enableHotpatching": {
+            "type": "bool",
+            "defaultvalue": false
+        },
+        "zone": {
+            "type": "string",
+            "defaultvalue": "1"
+        }
+    },
+    "variables": {
+        "vnetId": "[parameters('virtualNetworkId')]",
+        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
+    },
+    "resources": [
+        {
+            "name": "[parameters('networkInterfaceName')]",
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2018-10-01",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/publicIpAddresses/', parameters('publicIpAddressName'))]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "subnet": {
+                                "id": "[variables('subnetRef')]"
+                            },
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIpAddress": {
+                                "id": "[resourceId(resourceGroup().name, 'Microsoft.Network/publicIpAddresses', parameters('publicIpAddressName'))]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "[parameters('publicIpAddressName')]",
+            "type": "Microsoft.Network/publicIpAddresses",
+            "apiVersion": "2019-02-01",
+            "location": "[parameters('location')]",
+            "properties": {
+                "publicIpAllocationMethod": "[parameters('publicIpAddressType')]"
+            },
+            "sku": {
+                "name": "[parameters('publicIpAddressSku')]"
+            },
+            "zones": [
+                "[parameters('zone')]"
+            ]
+        },
+        {
+            "name": "[parameters('virtualMachineName')]",
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2021-03-01",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('virtualMachineSize')]"
+                },
+                "storageProfile": {
+                    "osDisk": {
+                        "createOption": "fromImage",
+                        "managedDisk": {
+                            "storageAccountType": "[parameters('osDiskType')]"
+                        }
+                    },
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2019-Datacenter-smalldisk",
+                        "version": "latest"
+                    }
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName'))]"
+                        }
+                    ]
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachineComputerName')]",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]",
+                    "windowsConfiguration": {
+                        "enableAutomaticUpdates": true,
+                        "provisionVmAgent": true,
+                        "patchSettings": {
+                            "enableHotpatching": "[parameters('enableHotpatching')]",
+                            "patchMode": "[parameters('patchMode')]"
+                        }
+                    }
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true
+                    }
+                }
+            },
+            "zones": [
+                "[parameters('zone')]"
+            ]
+        }
+    ],
+    "outputs": {
+        "adminUsername": {
+            "type": "string",
+            "value": "[parameters('adminUsername')]"
+        }
+    }
+}
