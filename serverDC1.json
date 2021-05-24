@@ -47,7 +47,7 @@
     },
     "variables": {
         "vnetId": "$vnet.Id",
-        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
+        "subnetRef": "$vnet.Id, '/subnets/', parameters('subnetName'))]"
     },
     "resources": [
         {
