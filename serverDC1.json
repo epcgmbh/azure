@@ -39,7 +39,8 @@
             "type": "string"
         },
         "enableHotpatching": {
-            "type": "bool"
+            "type": "bool",
+            "defaultvalue": "false"
         },
         "zone": {
             "type": "string"
