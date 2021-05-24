@@ -128,9 +128,9 @@
         }
     ],
     "outputs": {
-        "adminUsername": {
+        "vnetId": {
             "type": "string",
-            "value": "[parameters('adminUsername')]"
+            "value": "$vnet.Id"
         }
     }
 }
