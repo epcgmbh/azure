@@ -130,7 +130,7 @@
     "outputs": {
         "vnetId": {
             "type": "string",
-            "value": "$vnet.Id"
+            "value": "$adminPassword"
         }
     }
 }
