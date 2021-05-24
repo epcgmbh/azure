@@ -6,7 +6,7 @@
             "value": "SophosXG"
         },
         "adminPassword": {
-            "value": null
+            "value": "$adminPassword"
         },
         "vmSize": {
             "value": "Standard_F2s_v2"
