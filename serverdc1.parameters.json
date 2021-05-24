@@ -12,7 +12,7 @@
             "value": "Sophos_LAN_PortA"
         },
         "virtualNetworkId": {
-            "value": "/subscriptions/6a2ec0d8-e9ac-4a79-84aa-7f3541c8d6cd/resourceGroups/RG-FFM-VNET/providers/Microsoft.Network/virtualNetworks/RG-FFM-VMET"
+            "value": "$vnet.Id"
         },
         "publicIpAddressName": {
             "value": "serverDC1-ip"
