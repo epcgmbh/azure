@@ -38,10 +38,6 @@
         "patchMode": {
             "type": "string"
         },
-        "enableHotpatching": {
-            "type": "bool",
-            "defaultvalue": "false"
-        },
         "zone": {
             "type": "string"
         }
