@@ -33,7 +33,7 @@
             "value": "epc"
         },
         "adminPassword": {
-            "value": null
+            "value": "$adminPassword"
         },
         "patchMode": {
             "value": "AutomaticByOS"
