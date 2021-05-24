@@ -108,7 +108,6 @@
                         "enableAutomaticUpdates": true,
                         "provisionVmAgent": true,
                         "patchSettings": {
-                            "enableHotpatching": "[parameters('enableHotpatching')]",
                             "patchMode": "[parameters('patchMode')]"
                         }
                     }
