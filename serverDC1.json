@@ -125,9 +125,9 @@
         }
     ],
     "outputs": {
-        "vnetId": {
+        "AdminUsername": {
             "type": "string",
-            "value": "virtualNetworkId"
+            "value": "adminUsername"
         }
     }
 }
